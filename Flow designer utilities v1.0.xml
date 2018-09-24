@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2018-09-23 19:15:59">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description>Flow Designer Utilities connect creating record with corresponding Flow context.</description>
+<inserted/>
+<name>Flow Designer Utilities v1.0</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>232ceb14db38ef0033d057935e961996</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2018-09-23 19:15:59</sys_created_on>
+<sys_id>b31f78ecdbf8ef0033d057935e96197f</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2018-09-23 19:15:59</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_action_df1e3cacdbf8ef0033d057935e961949</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_ui_action"&gt;&lt;sys_ui_action action="INSERT_OR_UPDATE"&gt;&lt;action_name/&gt;&lt;active&gt;true&lt;/active&gt;&lt;client&gt;true&lt;/client&gt;&lt;client_script_v2&gt;&lt;![CDATA[function onClick(g_form) {
+
+}]]&gt;&lt;/client_script_v2&gt;&lt;comments&gt;Uses the record sys_id to find the corresponding Flow context record, then opens the context in a new tab.&lt;/comments&gt;&lt;condition&gt;!current.isNewRecord() &amp;amp;&amp;amp;  (new global.FlowDesignerUtils().hasFlow(current))&lt;/condition&gt;&lt;form_action&gt;true&lt;/form_action&gt;&lt;form_button&gt;false&lt;/form_button&gt;&lt;form_button_v2&gt;false&lt;/form_button_v2&gt;&lt;form_context_menu&gt;false&lt;/form_context_menu&gt;&lt;form_link&gt;true&lt;/form_link&gt;&lt;form_menu_button_v2&gt;false&lt;/form_menu_button_v2&gt;&lt;form_style/&gt;&lt;hint/&gt;&lt;isolate_script&gt;false&lt;/isolate_script&gt;&lt;list_action&gt;false&lt;/list_action&gt;&lt;list_banner_button&gt;false&lt;/list_banner_button&gt;&lt;list_button&gt;false&lt;/list_button&gt;&lt;list_choice&gt;false&lt;/list_choice&gt;&lt;list_context_menu&gt;false&lt;/list_context_menu&gt;&lt;list_link&gt;false&lt;/list_link&gt;&lt;list_save_with_form_button&gt;false&lt;/list_save_with_form_button&gt;&lt;list_style/&gt;&lt;name&gt;Show Flow Context&lt;/name&gt;&lt;onclick&gt;showFlowContext()&lt;/onclick&gt;&lt;order&gt;100&lt;/order&gt;&lt;script&gt;&lt;![CDATA[// Show the Flow context in a new tab
+function showFlowContext() {
+	var sysID = g_form.getUniqueValue().toString();
+	var ga = new GlideAjax('global.FlowDesignerUtils'); //Call script include.
+	ga.addParam('sysparm_name', 'getFlowContext');
+	ga.addParam('sysparm_sysID', sysID);
+	ga.getXML(callback);
+	
+	return false;
+	
+	function callback(response) {
+		var contextID = response.responseXML.documentElement.getAttribute("answer");
+		if (contextID == "") {
+			alert("Flow Context could not be found");
+		} else {
+			//display the flow context in a new tab
+			var url = new GlideURL('$flow-designer.do#/operations/context/' + contextID);
+			 g_navigation.open(url.getURL(), "_blank");
+		}
+		
+	}
+}
+]]&gt;&lt;/script&gt;&lt;show_insert&gt;true&lt;/show_insert&gt;&lt;show_multiple_update&gt;false&lt;/show_multiple_update&gt;&lt;show_query&gt;false&lt;/show_query&gt;&lt;show_update&gt;true&lt;/show_update&gt;&lt;sys_class_name&gt;sys_ui_action&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2018-09-23 19:12:42&lt;/sys_created_on&gt;&lt;sys_customer_update&gt;false&lt;/sys_customer_update&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;df1e3cacdbf8ef0033d057935e961949&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;Show Flow Context&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_replace_on_upgrade&gt;false&lt;/sys_replace_on_upgrade&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ui_action_df1e3cacdbf8ef0033d057935e961949&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2018-09-23 19:14:06&lt;/sys_updated_on&gt;&lt;table&gt;task&lt;/table&gt;&lt;ui11_compatible&gt;true&lt;/ui11_compatible&gt;&lt;ui16_compatible&gt;false&lt;/ui16_compatible&gt;&lt;/sys_ui_action&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1257878739</payload_hash>
+<remote_update_set display_value="Flow Designer Utilites v1.0">b31f78ecdbf8ef0033d057935e96197f</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2018-09-23 19:15:59</sys_created_on>
+<sys_id>331f78ecdbf8ef0033d057935e961980</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16607da6bbb0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2018-09-23 19:15:59</sys_updated_on>
+<table>task</table>
+<target_name>Show Flow Context</target_name>
+<type>UI Action</type>
+<update_domain>global</update_domain>
+<update_guid>5cbe30ec83f8ef00ac2c6abab21d2424</update_guid>
+<update_guid_history>5cbe30ec83f8ef00ac2c6abab21d2424:-1257878739,235ef8ac97f8ef0025bbb535e6a5d31a:-196710908</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_include_269faa8cdbb8af0033d057935e96196c</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;public&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;global.FlowDesignerUtils&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;true&lt;/client_callable&gt;&lt;description&gt;Utilities to link Flow with creating record&lt;/description&gt;&lt;name&gt;FlowDesignerUtils&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var FlowDesignerUtils = Class.create();
+FlowDesignerUtils.prototype = Object.extendsObject(AbstractAjaxProcessor, {
+	
+	getFlowContext : function() {
+		
+		var rec_sysID = this.getParameter('sysparm_sysID');
+		
+		var gr = new GlideRecord("sys_flow_plan_context_binding");
+		gr.addQuery("hash_code", rec_sysID);
+		gr.query();
+		gr.next();
+		var contxtId = gr.sys_flow_context;
+		return contxtId;
+	},
+	/**
+ 	* Return true if 'record' has a flow in any state associated with it or false if no contexts are
+ 	* running against this current record.
+ 	*
+ 	* @param record
+ 	*            GlideRecord of a current record
+ 	* @return true if there is at least one flow context (any state) associated with the input GlideRecord
+ 	*/
+	hasFlow: function(record) {
+		if (typeof record.getRecordClassName != 'function')
+			return false;
+		
+		var count = new GlideAggregate('sys_flow_plan_context_binding');
+		count.addQuery('hash_code', record.sys_id);
+		count.addAggregate('COUNT');
+		count.query();
+		recCnt = 0;
+		if (count.next())
+			recCnt = count.getAggregate('COUNT');
+		
+		return recCnt &gt; 0;
+	},
+	
+	type: 'FlowDesignerUtils'
+});]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2018-09-22 14:27:39&lt;/sys_created_on&gt;&lt;sys_customer_update&gt;false&lt;/sys_customer_update&gt;&lt;sys_id&gt;269faa8cdbb8af0033d057935e96196c&lt;/sys_id&gt;&lt;sys_mod_count&gt;18&lt;/sys_mod_count&gt;&lt;sys_name&gt;FlowDesignerUtils&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_replace_on_upgrade&gt;false&lt;/sys_replace_on_upgrade&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_269faa8cdbb8af0033d057935e96196c&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2018-09-23 13:17:34&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1519060385</payload_hash>
+<remote_update_set display_value="Flow Designer Utilites v1.0">b31f78ecdbf8ef0033d057935e96197f</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2018-09-23 19:15:59</sys_created_on>
+<sys_id>3b1f78ecdbf8ef0033d057935e96197f</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1660694017e0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2018-09-23 19:15:59</sys_updated_on>
+<table/>
+<target_name>FlowDesignerUtils</target_name>
+<type>Script Include</type>
+<update_domain>global</update_domain>
+<update_guid>691d6754c538ef000ef217e04fb1db08</update_guid>
+<update_guid_history>691d6754c538ef000ef217e04fb1db08:-1519060385,3c83ef5c88f4ef00cfb3de24cef7c055:-516941001,1bd1af1c31f4ef0090cb287dc2f29d82:-667812223,18c1235c3df4ef009fbbc4b3b770be30:-1465814794,1c6d5f588cf4ef002c0bf01e04bbca42:976851611,f2aa5bd4bbf4ef009e2370ec1622c2b9:1046799081,fde9db94b4f4ef001dcd719957b1c421:2143406766,78d1d348203caf00b7a28eaf4bba46f3:-708157118,dc1c8344d03caf00f8a7dc0c9ea4a96a:-1680019950,138ac304c23caf0044cb62ce43db08da:-374495280,0028cb40343caf0071d7f86f6b9ffac1:856761129,ce33878c07f8af00d284fde03cff6761:1941458749,4c620f4cdaf8af00a75b4be69f169078:-1592621342,43a04b0c00f8af00852209905ba33822:1556635137,852d7e482bf8af001d61d299cfdd0b4f:-2027569690,f98c7648a1f8af0059236aea97a46fbc:199024894,fb2c7248c7f8af002c706cf11339d95c:1562917293,7394b64013f8af00fcefcd86dde33356:-1732247270,5283facc16b8af0041df8c6a556a3b07:-1852066491</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
